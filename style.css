@@ -512,3 +512,63 @@ a {
     display: none;
   }
 }
+
+/* ─── Imprint ──────────────────────────────────────────────────────────── */
+
+.imprint-section {
+  padding: 10rem var(--pad-x) 8rem;
+  min-height: 80vh;
+}
+
+.imprint-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 300;
+  color: var(--black);
+  margin-bottom: 4rem;
+}
+
+.imprint-body {
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.imprint-item {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 1rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.imprint-item:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.imprint-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding-top: 0.15rem;
+}
+
+.imprint-value {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--black);
+}
+
+.imprint-value a {
+  border-bottom: 1px solid var(--rule);
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.imprint-value a:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
