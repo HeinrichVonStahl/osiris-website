@@ -1,39 +1,47 @@
-/* ─── Thesis page styles ────────────────────────────────────────── */
+/* ─── Thesis / single-page styles ──────────────────────────────────── */
 
-/* Nav active state */
-.nav-active {
-  color: var(--black) !important;
-  border-bottom: 1px solid var(--gold);
-  padding-bottom: 0.1rem;
+/* ── Site intro (replaces Philosophy/Approach blocks) ────────────── */
+
+.site-intro {
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--rule);
 }
 
-/* ── Hero ───────────────────────────────────────────────────── */
-
-.th-hero {
-  /* top matches index .hero (8rem); no lateral padding — .container handles it */
-  padding: 8rem 0 6rem;
-  position: relative;
-  overflow: hidden;
+.site-intro-p {
+  max-width: 680px;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--grey);
 }
 
-.th-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 70% 60% at 30% 60%, rgba(184,151,90,0.05) 0%, transparent 70%);
-  pointer-events: none;
+/* ── Thesis section header (anchor target before Core Thesis) ─────── */
+
+.th-section-header {
+  padding: 6rem 0 3rem;
+  border-top: 1px solid var(--rule);
 }
 
-.th-hero-sub {
+/* Remove double border: quote-section bottom-border + th-section-header top-border */
+.quote-section + .th-section-header {
+  border-top: none;
+}
+
+.th-section-header-sub {
   max-width: 620px;
   font-size: 16px;
   font-weight: 300;
   line-height: 1.8;
   color: var(--grey);
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 
-/* ── Shared text helpers ────────────────────────────────────────── */
+/* Remove double border: th-section-header bottom padding + th-intro top border */
+.th-section-header + .th-intro {
+  border-top: none;
+}
+
+/* ── Shared text helpers ────────────────────────────────────────────── */
 
 .th-h2 {
   font-family: var(--font-serif);
