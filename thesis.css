@@ -217,11 +217,10 @@
 /* ── Synthesis section — distinct dark room ─────────────────────────────── */
 
 .th-synthesis {
-  padding: 11rem var(--pad-x);
+  padding: 6rem var(--pad-x);
   background: var(--black);
-  /* Gold frame: 2px solid borders mark the entry and exit of this section */
-  border-top: 2px solid var(--gold);
-  border-bottom: 2px solid var(--gold);
+  border-top: 5px solid var(--gold);
+  border-bottom: 5px solid var(--gold);
 }
 
 .th-synthesis .section-label {
@@ -235,10 +234,6 @@
   align-items: center;
 }
 
-/*
- * Body text at full opacity (#f5f3ee) vs rgba(245,243,238,0.65) used in Space pillar.
- * This is the primary visual differentiator between the two black sections.
- */
 .th-synthesis .th-p--light {
   font-size: 16px;
   line-height: 1.95;
