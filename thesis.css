@@ -1,20 +1,5 @@
 /* ─── Thesis / single-page styles ──────────────────────────────────── */
 
-/* ── Site intro (replaces Philosophy/Approach blocks) ────────────── */
-
-.site-intro {
-  padding: 5rem 0;
-  border-bottom: 1px solid var(--rule);
-}
-
-.site-intro-p {
-  max-width: 680px;
-  font-size: 17px;
-  font-weight: 300;
-  line-height: 1.85;
-  color: var(--grey);
-}
-
 /* ── Thesis section header (anchor target before Core Thesis) ─────── */
 
 .th-section-header {
@@ -22,9 +7,12 @@
   border-top: 1px solid var(--rule);
 }
 
-/* Remove double border: quote-section bottom-border + th-section-header top-border */
-.quote-section + .th-section-header {
-  border-top: none;
+.th-section-lead {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--grey);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.01em;
 }
 
 .th-section-header-sub {
@@ -33,7 +21,7 @@
   font-weight: 300;
   line-height: 1.8;
   color: var(--grey);
-  margin-top: 1.5rem;
+  margin-top: 0;
 }
 
 /* Remove double border: th-section-header bottom padding + th-intro top border */
