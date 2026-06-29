@@ -214,29 +214,49 @@
   transform: translateY(0);
 }
 
-/* ── Synthesis section ───────────────────────────────────────────────── */
+/* ── Synthesis section — climactic treatment ───────────────────────────── */
 
 .th-synthesis {
-  padding: 7rem var(--pad-x);
+  /* Technique #3: 1.57× the padding of pillar sections (7rem → 11rem) */
+  padding: 11rem var(--pad-x);
   background: var(--black);
+  /* Gold entry rule: visually separates from the black Space section above */
+  border-top: 1px solid rgba(184,151,90,0.45);
 }
 
 .th-synthesis .section-label {
   color: var(--gold);
 }
 
+/* Technique #3: wider gap and larger body text than pillar sections */
 .th-synthesis-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 5rem;
+  gap: 7rem;
   align-items: center;
 }
 
-/* E/ACC sub-label within synthesis text column */
+/* Synthesis body text: 16px + more open leading vs 15px/1.85 elsewhere */
+.th-synthesis .th-p--light {
+  font-size: 16px;
+  line-height: 1.95;
+  margin-bottom: 1.5rem;
+}
+
+.th-synthesis .th-p--light:last-child { margin-bottom: 0; }
+
+/* Technique #4: E/ACC becomes a serif italic heading, not a small-caps chip */
 .th-eacc-label {
-  color: var(--gold) !important;
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  line-height: 1.2;
+  color: var(--gold);
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
 }
 
 /* ── Closing quote section — climactic full-dark treatment ───────────── */
