@@ -214,21 +214,20 @@
   transform: translateY(0);
 }
 
-/* ── Synthesis section — climactic treatment ───────────────────────────── */
+/* ── Synthesis section — distinct dark room ─────────────────────────────── */
 
 .th-synthesis {
-  /* Technique #3: 1.57× the padding of pillar sections (7rem → 11rem) */
   padding: 11rem var(--pad-x);
   background: var(--black);
-  /* Gold entry rule: visually separates from the black Space section above */
-  border-top: 1px solid rgba(184,151,90,0.45);
+  /* Gold frame: 2px solid borders mark the entry and exit of this section */
+  border-top: 2px solid var(--gold);
+  border-bottom: 2px solid var(--gold);
 }
 
 .th-synthesis .section-label {
   color: var(--gold);
 }
 
-/* Technique #3: wider gap and larger body text than pillar sections */
 .th-synthesis-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -236,16 +235,20 @@
   align-items: center;
 }
 
-/* Synthesis body text: 16px + more open leading vs 15px/1.85 elsewhere */
+/*
+ * Body text at full opacity (#f5f3ee) vs rgba(245,243,238,0.65) used in Space pillar.
+ * This is the primary visual differentiator between the two black sections.
+ */
 .th-synthesis .th-p--light {
   font-size: 16px;
   line-height: 1.95;
   margin-bottom: 1.5rem;
+  color: var(--white);
 }
 
 .th-synthesis .th-p--light:last-child { margin-bottom: 0; }
 
-/* Technique #4: E/ACC becomes a serif italic heading, not a small-caps chip */
+/* E/ACC: serif italic heading in gold — heading-scale, not a small-caps chip */
 .th-eacc-label {
   font-family: var(--font-serif);
   font-size: clamp(1.4rem, 2.2vw, 1.9rem);
