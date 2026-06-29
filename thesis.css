@@ -1,4 +1,4 @@
-/* ─── Thesis page styles ───────────────────────────────────────────────── */
+/* ─── Thesis page styles ────────────────────────────────────────── */
 
 /* Nav active state */
 .nav-active {
@@ -7,10 +7,11 @@
   padding-bottom: 0.1rem;
 }
 
-/* ── Hero ─────────────────────────────────────────────────────────────── */
+/* ── Hero ───────────────────────────────────────────────────── */
 
 .th-hero {
-  padding: 10rem var(--pad-x) 6rem;
+  /* top matches index .hero (8rem); no lateral padding — .container handles it */
+  padding: 8rem 0 6rem;
   position: relative;
   overflow: hidden;
 }
@@ -32,7 +33,7 @@
   margin-top: 2rem;
 }
 
-/* ── Shared text helpers ──────────────────────────────────────────────── */
+/* ── Shared text helpers ────────────────────────────────────────── */
 
 .th-h2 {
   font-family: var(--font-serif);
@@ -94,7 +95,7 @@
 
 .th-p--light:last-child { margin-bottom: 0; }
 
-/* ── Intro section (core thesis + diagram 1) ─────────────────────────── */
+/* ── Intro section (core thesis + diagram 1) ───────────────────────── */
 
 .th-intro {
   padding: 5rem var(--pad-x) 7rem;
@@ -118,7 +119,7 @@
 
 .th-text-col p:last-child { margin-bottom: 0; }
 
-/* ── Pillars intro ───────────────────────────────────────────────────── */
+/* ── Pillars intro ────────────────────────────────────────────────── */
 
 .th-pillars-intro {
   padding: 7rem var(--pad-x) 5rem;
@@ -137,7 +138,7 @@
   color: var(--grey);
 }
 
-/* ── Individual pillar sections ──────────────────────────────────────── */
+/* ── Individual pillar sections ────────────────────────────────────────── */
 
 .th-pillar {
   padding: 7rem var(--pad-x);
@@ -235,7 +236,7 @@
   align-items: center;
 }
 
-/* ── Closing CTA ─────────────────────────────────────────────────────── */
+/* ── Closing CTA ──────────────────────────────────────────────────── */
 
 .th-cta-section {
   padding: 7rem var(--pad-x);
@@ -258,7 +259,7 @@
   color: var(--black);
 }
 
-/* ── Responsive ──────────────────────────────────────────────────────── */
+/* ── Responsive ────────────────────────────────────────────────────── */
 
 @media (max-width: 768px) {
   .th-intro-grid,
