@@ -75,10 +75,6 @@ Everything keys off CSS custom properties defined in `:root` at the top of
 
 ## Known inconsistencies (don't assume these are intentional)
 
-- `imprint.html`'s nav links to `index.html#philosophy` and `index.html#approach`,
-  but those sections no longer exist in `index.html` (the homepage was restructured
-  into the single-page thesis layout). Its "Thesis" link also points at
-  `thesis.html` rather than the `#thesis` anchor.
 - `style.css` still contains rules for sections that were removed from the current
   homepage (`.philosophy`, `.divider-section`, `.approach`, `.quote-section`,
   `.hero-cta`, `.stat*`). They are effectively dead unless reintroduced — don't
@@ -86,8 +82,8 @@ Everything keys off CSS custom properties defined in `:root` at the top of
 
 ## Git & deploys
 
-- Development happens on feature branches; changes reach production only when
-  merged to `main` (GitHub Pages serves `main`). Do not push directly to `main`
-  without explicit permission.
+- **Commit and push directly to `main`.** GitHub Pages serves `main`, so a push
+  deploys the live site.
+- **Never open a pull request** for this project.
 - Because there's no build, a broken commit ships broken HTML/CSS live — verify
-  visually in a browser before merging.
+  visually in a browser before pushing.
