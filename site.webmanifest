@@ -1,0 +1,12 @@
+{
+  "name": "Osiris",
+  "short_name": "Osiris",
+  "description": "A Berlin holding company investing in the future of artificial intelligence, space colonisation, and humanoid robotics.",
+  "icons": [
+    { "src": "/favicon.png", "type": "image/png", "sizes": "any" }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a"
+}

@@ -9,8 +9,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="icon" href="favicon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/favicon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#f5f3ee" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="thesis.css" />
+  <noscript>
+    <style>.reveal { opacity: 1 !important; transform: none !important; }</style>
+  </noscript>
 </head>
 <body>
 
@@ -19,7 +25,11 @@
       <div class="nav-logo">
         <span class="logo-text">OSIRIS</span>
       </div>
-      <ul class="nav-links">
+      <button class="nav-toggle" aria-label="Toggle menu" aria-controls="nav-menu" aria-expanded="false">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+      <ul class="nav-links" id="nav-menu">
         <li><a href="#thesis">Thesis</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -569,6 +579,20 @@
       });
     }, { threshold: 0.2 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Mobile nav toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    if (navToggle && navMenu) {
+      navToggle.addEventListener('click', () => {
+        const open = navMenu.classList.toggle('is-open');
+        navToggle.setAttribute('aria-expanded', open);
+      });
+      navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        navMenu.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }));
+    }
   </script>
 
 </body>

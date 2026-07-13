@@ -20,10 +20,14 @@ with a long-form investment thesis, plus a legal imprint page.
 | --- | --- |
 | `index.html` | The entire homepage — hero, investment thesis (3 pillars + synthesis), closing quote, contact. This is where almost all content lives. |
 | `imprint.html` | German legal imprint (Impressum) page. |
-| `thesis.html` | Thin redirect stub → `index.html#thesis` (kept for the old `/thesis` URL). No real content. |
+| `404.html` | Branded "page not found" page. GitHub Pages serves it automatically for unknown URLs. Uses root-relative (`/style.css`) asset paths so it works at any URL depth. |
+| `thesis.html` | Thin redirect stub → `index.html#thesis` (kept for the old `/thesis` URL). Redirects via JS `location.replace` with a `<noscript>` meta-refresh fallback. No real content. |
 | `style.css` | Global styles: reset, design tokens, header/nav/hero/contact/footer, imprint. |
 | `thesis.css` | Styles specific to the single-page thesis sections (classes prefixed `th-`). Loaded only by `index.html`. |
-| `favicon.png` | Site icon. |
+| `favicon.png` | Site icon (also reused as `apple-touch-icon` and manifest icon). |
+| `site.webmanifest` | PWA/manifest metadata (name, icons, theme colors). |
+| `robots.txt` | Allows all crawlers; points to the sitemap. |
+| `sitemap.xml` | Lists canonical URLs (`/` and `/imprint.html`). Update `lastmod` when content changes. |
 | `CNAME` | GitHub Pages custom domain. Do not remove. |
 
 ## Design system
@@ -54,9 +58,15 @@ Everything keys off CSS custom properties defined in `:root` at the top of
   CSS. Edit the SVG markup directly; there is no generator.
 - Scroll-reveal: elements with class `.reveal` fade/slide in via an
   `IntersectionObserver` (the inline `<script>` at the bottom of `index.html`).
-  Add `.reveal` to opt an element into the animation.
+  Add `.reveal` to opt an element into the animation. A `<noscript>` block and
+  the `prefers-reduced-motion` media query both force `.reveal` visible, so
+  content never depends on JS or animation to be readable.
 - Responsive breakpoint is `max-width: 768px` (see the `@media` blocks at the
   bottom of each stylesheet); multi-column grids collapse to one column there.
+- Mobile navigation: below the breakpoint the `.nav-links` list is hidden and a
+  `.nav-toggle` hamburger button reveals it as a dropdown panel. The toggle logic
+  is a small inline `<script>` duplicated in every page that has a header
+  (`index.html`, `imprint.html`, `404.html`) — keep the three copies in sync.
 
 ## Working here
 
@@ -75,10 +85,10 @@ Everything keys off CSS custom properties defined in `:root` at the top of
 
 ## Known inconsistencies (don't assume these are intentional)
 
-- `style.css` still contains rules for sections that were removed from the current
-  homepage (`.philosophy`, `.divider-section`, `.approach`, `.quote-section`,
-  `.hero-cta`, `.stat*`). They are effectively dead unless reintroduced — don't
-  rely on them being live.
+- `imprint.html` declares `lang="en"`, but an Impressum is a German legal
+  construct and its "value" fields are German. The page's labels/heading are
+  currently English. See the roadmap for the proper fix (localise to German with
+  `lang="de"`, or keep English UI and mark German runs with `lang="de"`).
 
 ## Git & deploys
 
@@ -87,3 +97,54 @@ Everything keys off CSS custom properties defined in `:root` at the top of
 - **Never open a pull request** for this project.
 - Because there's no build, a broken commit ships broken HTML/CSS live — verify
   visually in a browser before pushing.
+
+## Professionalization roadmap
+
+Ongoing, multi-session effort to raise the site to a highly professional bar.
+Keep this list current: check items off when done, add new findings as they come
+up. Grouped by phase; within a phase, order is rough priority.
+
+### Phase 1 — foundations ✅ (done)
+
+- [x] Working mobile navigation (hamburger + dropdown panel).
+- [x] `prefers-reduced-motion` support (disables smooth scroll + reveal animation).
+- [x] No-JS / `<noscript>` fallback so `.reveal` content always shows.
+- [x] Branded `404.html`.
+- [x] `apple-touch-icon` + `site.webmanifest` + `theme-color`.
+- [x] `robots.txt` + `sitemap.xml`.
+- [x] Removed dead CSS (`.philosophy`, `.approach`, `.stat*`, etc.).
+- [x] Modernised `thesis.html` redirect (JS `location.replace` + noscript fallback).
+
+### Phase 2 — discoverability & correctness (next)
+
+- [ ] **Social share cards** (deferred earlier): Open Graph + Twitter Card meta
+      on `index.html`/`imprint.html`, plus a 1200×630 share image. Without this,
+      the link previews as a bare URL in Slack/LinkedIn/iMessage.
+- [ ] **JSON-LD structured data**: `Organization` schema (name, url, logo,
+      address, sameAs) in `index.html` `<head>`.
+- [ ] **Imprint language correctness** (see Known inconsistencies): either
+      localise the Impressum to German with `lang="de"`, or keep English UI and
+      wrap German-language runs in `lang="de"`. Decide with the owner — a German
+      GmbH Impressum is conventionally German.
+- [ ] **Dedicated icon sizes**: generate proper 180×180 `apple-touch-icon` and
+      32/16 favicons rather than reusing the single `favicon.png`.
+
+### Phase 3 — polish & performance
+
+- [ ] Run a **Lighthouse / accessibility audit**; target ~100 across the board.
+      Check colour contrast on grey-on-cream body text and focus-visible states.
+- [ ] **Font performance**: fonts are render-blocking Google Fonts. Add
+      `&display=swap` (already present) review; consider self-hosting the two
+      families to remove the third-party request and layout shift.
+- [ ] **Visible keyboard focus styles** across nav, links, and the mobile toggle.
+- [ ] **Print stylesheet** for the imprint (legal pages are often printed).
+- [ ] Privacy-respecting **analytics** (e.g. Plausible) *if* the owner wants
+      traffic data — and only with a matching privacy note.
+
+### Phase 4 — infrastructure (only if complexity grows)
+
+- [ ] The header/footer/nav markup and the nav `<script>` are duplicated across
+      `index.html`, `imprint.html`, and `404.html`. If pages multiply, consider a
+      tiny build/templating step to keep them DRY — but not before it's justified;
+      the no-build simplicity is a feature.
+- [ ] Automated link-checking / HTML validation in CI.
