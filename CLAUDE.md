@@ -19,7 +19,7 @@ with a long-form investment thesis, plus a legal imprint page.
 | File | Purpose |
 | --- | --- |
 | `index.html` | The entire homepage — hero, investment thesis (3 pillars + synthesis), closing quote, contact. This is where almost all content lives. |
-| `imprint.html` | German legal imprint (Impressum) page. |
+| `imprint.html` | German legal imprint (Impressum) page. `lang="de"`; the shared English header/footer chrome is marked `lang="en"`. |
 | `404.html` | Branded "page not found" page. GitHub Pages serves it automatically for unknown URLs. Uses root-relative (`/style.css`) asset paths so it works at any URL depth. |
 | `thesis.html` | Thin redirect stub → `index.html#thesis` (kept for the old `/thesis` URL). Redirects via JS `location.replace` with a `<noscript>` meta-refresh fallback. No real content. |
 | `style.css` | Global styles: reset, design tokens, header/nav/hero/contact/footer, imprint. |
@@ -86,10 +86,9 @@ Everything keys off CSS custom properties defined in `:root` at the top of
 
 ## Known inconsistencies (don't assume these are intentional)
 
-- `imprint.html` declares `lang="en"`, but an Impressum is a German legal
-  construct and its "value" fields are German. The page's labels/heading are
-  currently English. See the roadmap for the proper fix (localise to German with
-  `lang="de"`, or keep English UI and mark German runs with `lang="de"`).
+- None currently outstanding. (The imprint is now a proper German Impressum with
+  `lang="de"`; the previously-dead CSS has been removed.) Add new findings here as
+  they come up.
 
 ## Regenerating the share card
 
@@ -135,12 +134,12 @@ up. Grouped by phase; within a phase, order is rough priority.
 - [x] **Social share cards**: Open Graph + Twitter Card meta on
       `index.html`/`imprint.html`, plus the 1200×630 `og-image.png`. The link now
       previews as a branded card in Slack/LinkedIn/iMessage instead of a bare URL.
-- [ ] **JSON-LD structured data**: `Organization` schema (name, url, logo,
-      address, sameAs) in `index.html` `<head>`.
-- [ ] **Imprint language correctness** (see Known inconsistencies): either
-      localise the Impressum to German with `lang="de"`, or keep English UI and
-      wrap German-language runs in `lang="de"`. Decide with the owner — a German
-      GmbH Impressum is conventionally German.
+- [x] **JSON-LD structured data**: `Organization` schema (name, legalName, url,
+      logo, image, description, email, address) in `index.html` `<head>`. No
+      `sameAs` yet — add social/registry profile URLs here if any ever exist.
+- [x] **Imprint language correctness**: localised the Impressum to German with
+      `lang="de"` (labels, heading, "Angaben gemäß § 5 TMG", Amtsgericht,
+      Deutschland). Shared English header/footer chrome marked `lang="en"`.
 - [ ] **Dedicated icon sizes**: generate proper 180×180 `apple-touch-icon` and
       32/16 favicons rather than reusing the single `favicon.png`.
 

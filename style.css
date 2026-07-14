@@ -392,6 +392,15 @@ a {
   margin-bottom: 4rem;
 }
 
+.imprint-intro {
+  margin-top: -2.75rem;
+  margin-bottom: 3.5rem;
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--grey);
+}
+
 .imprint-headline em {
   font-style: italic;
   color: var(--gold);
