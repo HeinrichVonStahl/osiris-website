@@ -204,8 +204,9 @@ up. Grouped by phase; within a phase, order is rough priority.
       chrome, forces ink-friendly black-on-white, and tightens the imprint for
       paper (drops the fixed-header offset, uniform hairline dividers,
       `break-inside: avoid` on items). Verified via print-media PDF of the imprint.
-- [ ] Privacy-respecting **analytics** (e.g. Plausible) *if* the owner wants
-      traffic data — and only with a matching privacy note.
+
+_Analytics was considered and deliberately declined — the owner does not want
+traffic data. Do not re-add it._
 
 ### Phase 4 — infrastructure (only if complexity grows)
 
