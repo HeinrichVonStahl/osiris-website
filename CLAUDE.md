@@ -24,6 +24,8 @@ with a long-form investment thesis, plus a legal imprint page.
 | `thesis.html` | Thin redirect stub → `index.html#thesis` (kept for the old `/thesis` URL). Redirects via JS `location.replace` with a `<noscript>` meta-refresh fallback. No real content. |
 | `style.css` | Global styles: reset, design tokens, header/nav/hero/contact/footer, imprint. |
 | `thesis.css` | Styles specific to the single-page thesis sections (classes prefixed `th-`). Loaded only by `index.html`. |
+| `fonts.css` | `@font-face` declarations for the self-hosted fonts (Cormorant Garamond + Inter), `font-display: swap`. Loaded by every page in place of Google Fonts. |
+| `fonts/` | Self-hosted `.woff2` files (latin + latin-ext subsets of the used weights/styles). See "Regenerating the fonts". |
 | `favicon.png` | Master source glyph (152×152, gold Osiris "O" on transparent). Not linked by any page directly — the sized icons below are derived from it. Keep it; it's the source of truth. |
 | `favicon.ico` | Multi-resolution (16/32/48) legacy icon. Served at `/favicon.ico`, the default browsers/readers request. |
 | `favicon-32x32.png` / `favicon-16x16.png` | Transparent PNG tab icons for modern browsers. |
@@ -48,8 +50,9 @@ Everything keys off CSS custom properties defined in `:root` at the top of
   AA as small text on light, so anywhere gold **text** sits on white/cream use
   `--gold-text`; keep `--gold` for dark sections and non-text (rules/diagrams).
 - **Fonts:** `--font-serif` (Cormorant Garamond, used for headlines/quotes, often
-  italic) and `--font-sans` (Inter, used for body/labels). Loaded from Google
-  Fonts via `<link>` in each page `<head>`.
+  italic) and `--font-sans` (Inter, used for body/labels). **Self-hosted** as
+  woff2 in `fonts/`, declared in `fonts.css` (no third-party Google request).
+  Each page preloads the three hero-critical latin faces and links `fonts.css`.
 - **Layout:** `--container` (1100px max width) and `--pad-x` (fluid horizontal
   padding). Wrap content in `.container` and use `.section-label` for the small
   gold uppercase eyebrow labels.
@@ -123,6 +126,19 @@ black and rounds the corners). If you change the master glyph, re-run the same
 steps and keep the sizes/paths in sync with the `<link rel="icon">` tags
 (duplicated in `index.html`, `imprint.html`, `404.html`) and `site.webmanifest`.
 
+## Regenerating the fonts
+
+The fonts in `fonts/` and the `@font-face` blocks in `fonts.css` were generated
+from Google Fonts, then self-hosted. To refresh or add a weight/style: fetch the
+`css2` stylesheet with a modern-Chrome `User-Agent` (so it returns woff2) for the
+exact query the site used —
+`family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500` —
+then, for the `latin` and `latin-ext` subset blocks only, download each woff2 to
+`fonts/<family-slug>-<weight>-<style>-<subset>.woff2` and emit a matching
+`@font-face` (keep the `unicode-range` and `font-display: swap`). If the used
+weights change, update both `fonts.css` and the `wght@…` list here. If you add a
+face used above the fold, add a matching `<link rel="preload">` in each page head.
+
 ## Git & deploys
 
 - **Commit and push directly to `main`.** GitHub Pages serves `main`, so a push
@@ -175,9 +191,12 @@ up. Grouped by phase; within a phase, order is rough priority.
       All text pairs now pass AA; dark-section text already did. (Ultra-faint
       decorative diagram captions like the `#aaa` "LOG SCALE" watermark are left
       as intentional de-emphasis.)
-- [ ] **Font performance**: fonts are render-blocking Google Fonts. Add
-      `&display=swap` (already present) review; consider self-hosting the two
-      families to remove the third-party request and layout shift.
+- [x] **Font performance**: self-hosted Cormorant Garamond + Inter as woff2 in
+      `fonts/` (latin + latin-ext), declared in `fonts.css` with
+      `font-display: swap`; removed the render-blocking Google Fonts request and
+      preload the hero-critical faces. Verified the site renders with all Google
+      Fonts requests blocked. (German umlauts live in the latin subset, so the
+      latin-ext files are dormant future-proofing.)
 - [x] **Visible keyboard focus styles**: `:focus-visible` rings (black on light
       sections, `--gold-lt` on dark) across nav, links, and the mobile toggle,
       plus a "Skip to content" skip link on every page.
