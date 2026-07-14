@@ -200,7 +200,10 @@ up. Grouped by phase; within a phase, order is rough priority.
 - [x] **Visible keyboard focus styles**: `:focus-visible` rings (black on light
       sections, `--gold-lt` on dark) across nav, links, and the mobile toggle,
       plus a "Skip to content" skip link on every page.
-- [ ] **Print stylesheet** for the imprint (legal pages are often printed).
+- [x] **Print stylesheet**: `@media print` block hides nav/footer/skip-link
+      chrome, forces ink-friendly black-on-white, and tightens the imprint for
+      paper (drops the fixed-header offset, uniform hairline dividers,
+      `break-inside: avoid` on items). Verified via print-media PDF of the imprint.
 - [ ] Privacy-respecting **analytics** (e.g. Plausible) *if* the owner wants
       traffic data — and only with a matching privacy note.
 

@@ -510,3 +510,64 @@ a {
   color: var(--gold-text);
   border-color: var(--gold-text);
 }
+
+/* ─── Print ────────────────────────────────────────────────────────────── */
+
+@media print {
+  @page {
+    margin: 2cm;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  /* Hide interactive / navigational chrome */
+  .site-header,
+  .site-footer,
+  .skip-link,
+  .nav-toggle {
+    display: none !important;
+  }
+
+  /* Imprint: drop the fixed-header offset and tighten for paper */
+  .imprint-section {
+    padding: 0;
+    min-height: 0;
+  }
+
+  .imprint-headline {
+    margin-bottom: 2.5rem;
+  }
+
+  .imprint-intro {
+    margin-top: 0;
+    margin-bottom: 2rem;
+  }
+
+  /* Ink-friendly, high-contrast text */
+  .section-label,
+  .imprint-label,
+  .imprint-value,
+  .imprint-value a {
+    color: #000;
+  }
+
+  .imprint-item {
+    break-inside: avoid;
+    border-color: #999;
+  }
+
+  .imprint-item:last-child {
+    border-bottom-color: #999;
+  }
+
+  .imprint-value a {
+    border-bottom: none;
+  }
+}
