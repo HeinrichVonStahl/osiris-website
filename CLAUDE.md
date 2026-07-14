@@ -24,7 +24,10 @@ with a long-form investment thesis, plus a legal imprint page.
 | `thesis.html` | Thin redirect stub → `index.html#thesis` (kept for the old `/thesis` URL). Redirects via JS `location.replace` with a `<noscript>` meta-refresh fallback. No real content. |
 | `style.css` | Global styles: reset, design tokens, header/nav/hero/contact/footer, imprint. |
 | `thesis.css` | Styles specific to the single-page thesis sections (classes prefixed `th-`). Loaded only by `index.html`. |
-| `favicon.png` | Site icon (also reused as `apple-touch-icon` and manifest icon). |
+| `favicon.png` | Master source glyph (152×152, gold Osiris "O" on transparent). Not linked by any page directly — the sized icons below are derived from it. Keep it; it's the source of truth. |
+| `favicon.ico` | Multi-resolution (16/32/48) legacy icon. Served at `/favicon.ico`, the default browsers/readers request. |
+| `favicon-32x32.png` / `favicon-16x16.png` | Transparent PNG tab icons for modern browsers. |
+| `apple-touch-icon.png` | 180×180 iOS home-screen icon: the gold "O" on brand black (`#0a0a0a`) with padding (iOS rounds corners, ignores transparency). |
 | `og-image.png` | 1200×630 social share card (OSIRIS wordmark, gold-on-black). Referenced by the Open Graph / Twitter `og:image` tags. See "Regenerating the share card" below. |
 | `site.webmanifest` | PWA/manifest metadata (name, icons, theme colors). |
 | `robots.txt` | Allows all crawlers; points to the sitemap. |
@@ -104,6 +107,17 @@ system fonts. Keep the output exactly 1200×630 — the `og:image:width/height`
 tags declare those dimensions. After changing it, re-run the platform preview
 debuggers (Facebook Sharing Debugger, LinkedIn Post Inspector) to bust caches.
 
+## Regenerating the icons
+
+All icons derive from `favicon.png` (152×152, transparent gold "O") using Pillow
+(`pip install Pillow`). The tab PNGs (`favicon-32x32.png`, `favicon-16x16.png`)
+are LANCZOS downscales that preserve transparency; `favicon.ico` bundles 16/32/48.
+`apple-touch-icon.png` composites the glyph (~122px) centred on a solid `#0a0a0a`
+canvas at 180×180 and is saved **without** alpha (iOS fills transparency with
+black and rounds the corners). If you change the master glyph, re-run the same
+steps and keep the sizes/paths in sync with the `<link rel="icon">` tags
+(duplicated in `index.html`, `imprint.html`, `404.html`) and `site.webmanifest`.
+
 ## Git & deploys
 
 - **Commit and push directly to `main`.** GitHub Pages serves `main`, so a push
@@ -140,8 +154,11 @@ up. Grouped by phase; within a phase, order is rough priority.
 - [x] **Imprint language correctness**: localised the Impressum to German with
       `lang="de"` (labels, heading, "Angaben gemäß § 5 TMG", Amtsgericht,
       Deutschland). Shared English header/footer chrome marked `lang="en"`.
-- [ ] **Dedicated icon sizes**: generate proper 180×180 `apple-touch-icon` and
-      32/16 favicons rather than reusing the single `favicon.png`.
+- [x] **Dedicated icon sizes**: generated 180×180 `apple-touch-icon.png`,
+      `favicon-32x32.png`, `favicon-16x16.png`, and a multi-res `favicon.ico`,
+      all derived from the `favicon.png` master (see "Regenerating the icons").
+      A richer PWA install experience (192/512 maskable icons) would want a
+      higher-resolution source glyph than the current 152×152 — deferred.
 
 ### Phase 3 — polish & performance
 
