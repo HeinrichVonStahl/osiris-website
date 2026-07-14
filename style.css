@@ -60,6 +60,47 @@ a {
   margin-bottom: 3rem;
 }
 
+/* ─── Accessibility ────────────────────────────────────────────────────── */
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 200;
+  background: var(--black);
+  color: var(--white);
+  padding: 0.7rem 1.25rem;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+:focus-visible {
+  outline: 2px solid var(--black);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* Light focus ring on dark full-bleed sections */
+.skip-link:focus-visible,
+.contact :focus-visible,
+.site-footer :focus-visible,
+.th-pillar--dark :focus-visible,
+.th-synthesis :focus-visible,
+.th-cta-section :focus-visible {
+  outline-color: var(--gold-lt);
+}
+
+#main {
+  scroll-margin-top: 6rem;
+}
+
 /* ─── Header / Nav ─────────────────────────────────────────────────────── */
 
 .site-header {

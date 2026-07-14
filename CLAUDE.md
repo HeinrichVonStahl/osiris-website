@@ -162,12 +162,20 @@ up. Grouped by phase; within a phase, order is rough priority.
 
 ### Phase 3 — polish & performance
 
-- [ ] Run a **Lighthouse / accessibility audit**; target ~100 across the board.
-      Check colour contrast on grey-on-cream body text and focus-visible states.
+- [~] **Accessibility / contrast audit** (in progress). Measured WCAG AA
+      (4.5:1) contrast — failures on **light** backgrounds only; all dark-section
+      text passes. Outstanding, pending an owner decision on the palette:
+      - body grey `--grey #7a7a7a` on white/cream: **3.9 / 3.6** (fails 4.5).
+        Darkening to ~`#6a6a6a` fixes it (4.9 / 4.6) with minimal visual change.
+      - gold labels `--gold #b8975a` on white/cream: **2.5 / 2.3** (fails, even
+        for large text). A darker `--gold` for small text on light would notably
+        change the brand accent — the harder tradeoff.
 - [ ] **Font performance**: fonts are render-blocking Google Fonts. Add
       `&display=swap` (already present) review; consider self-hosting the two
       families to remove the third-party request and layout shift.
-- [ ] **Visible keyboard focus styles** across nav, links, and the mobile toggle.
+- [x] **Visible keyboard focus styles**: `:focus-visible` rings (black on light
+      sections, `--gold-lt` on dark) across nav, links, and the mobile toggle,
+      plus a "Skip to content" skip link on every page.
 - [ ] **Print stylesheet** for the imprint (legal pages are often printed).
 - [ ] Privacy-respecting **analytics** (e.g. Plausible) *if* the owner wants
       traffic data — and only with a matching privacy note.
