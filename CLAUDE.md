@@ -20,6 +20,7 @@ with a long-form investment thesis, plus a legal imprint page.
 | --- | --- |
 | `index.html` | The entire homepage — hero, investment thesis (3 pillars + synthesis), closing quote, contact. This is where almost all content lives. |
 | `imprint.html` | German legal imprint (Impressum) page. `lang="de"`; the shared English header/footer chrome is marked `lang="en"`. |
+| `datenschutz.html` | German privacy policy (Datenschutzerklärung), `lang="de"`. Mirrors the imprint chrome; prose styled via `.legal-prose`. Documents that the site is static (no cookies/tracking), the GitHub Pages server logs, self-hosted fonts, and DSGVO data-subject rights. |
 | `404.html` | Branded "page not found" page. GitHub Pages serves it automatically for unknown URLs. Uses root-relative (`/style.css`) asset paths so it works at any URL depth. |
 | `thesis.html` | Thin redirect stub → `index.html#thesis` (kept for the old `/thesis` URL). Redirects via JS `location.replace` with a `<noscript>` meta-refresh fallback. No real content. |
 | `style.css` | Global styles: reset, design tokens, header/nav/hero/contact/footer, imprint. |
@@ -175,6 +176,12 @@ up. Grouped by phase; within a phase, order is rough priority.
 - [x] **Imprint language correctness**: localised the Impressum to German with
       `lang="de"` (labels, heading, "Angaben gemäß § 5 TMG", Amtsgericht,
       Deutschland). Shared English header/footer chrome marked `lang="en"`.
+- [x] **Privacy policy (Datenschutzerklärung)**: added `datenschutz.html` — a
+      minimal, accurate DSGVO policy for a static site (no cookies/tracking;
+      documents GitHub Pages server logs, self-hosted fonts, data-subject rights,
+      Berlin supervisory authority). Footer now cross-links Imprint + Privacy on
+      every page; added to `sitemap.xml`. **Not legal advice** — have counsel
+      review before relying on it.
 - [x] **Dedicated icon sizes**: generated 180×180 `apple-touch-icon.png`,
       `favicon-32x32.png`, `favicon-16x16.png`, and a multi-res `favicon.ico`,
       all derived from the `favicon.png` master (see "Regenerating the icons").

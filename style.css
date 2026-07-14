@@ -511,6 +511,77 @@ a {
   border-color: var(--gold-text);
 }
 
+/* ─── Legal prose (privacy policy) ─────────────────────────────────────── */
+
+.legal-prose {
+  max-width: 680px;
+}
+
+.legal-lead {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--grey);
+  margin-bottom: 3rem;
+}
+
+.legal-prose h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--black);
+  margin: 3rem 0 1rem;
+}
+
+.legal-prose p {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--grey);
+  margin-bottom: 1rem;
+}
+
+.legal-prose ul {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+}
+
+.legal-prose li {
+  position: relative;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--grey);
+  padding-left: 1.25rem;
+  margin-bottom: 0.35rem;
+}
+
+.legal-prose li::before {
+  content: '\2014';
+  position: absolute;
+  left: 0;
+  color: var(--gold-text);
+}
+
+.legal-prose a {
+  color: var(--black);
+  border-bottom: 1px solid var(--gold-text);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.legal-prose a:hover {
+  color: var(--gold-text);
+  border-color: var(--gold-text);
+}
+
+.legal-updated {
+  margin-top: 3rem;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
 /* ─── Print ────────────────────────────────────────────────────────────── */
 
 @media print {
@@ -554,7 +625,12 @@ a {
   .section-label,
   .imprint-label,
   .imprint-value,
-  .imprint-value a {
+  .imprint-value a,
+  .legal-prose,
+  .legal-prose h2,
+  .legal-prose p,
+  .legal-prose li,
+  .legal-prose a {
     color: #000;
   }
 
