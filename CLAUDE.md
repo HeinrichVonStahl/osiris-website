@@ -25,6 +25,7 @@ with a long-form investment thesis, plus a legal imprint page.
 | `style.css` | Global styles: reset, design tokens, header/nav/hero/contact/footer, imprint. |
 | `thesis.css` | Styles specific to the single-page thesis sections (classes prefixed `th-`). Loaded only by `index.html`. |
 | `favicon.png` | Site icon (also reused as `apple-touch-icon` and manifest icon). |
+| `og-image.png` | 1200×630 social share card (OSIRIS wordmark, gold-on-black). Referenced by the Open Graph / Twitter `og:image` tags. See "Regenerating the share card" below. |
 | `site.webmanifest` | PWA/manifest metadata (name, icons, theme colors). |
 | `robots.txt` | Allows all crawlers; points to the sitemap. |
 | `sitemap.xml` | Lists canonical URLs (`/` and `/imprint.html`). Update `lastmod` when content changes. |
@@ -90,6 +91,20 @@ Everything keys off CSS custom properties defined in `:root` at the top of
   currently English. See the roadmap for the proper fix (localise to German with
   `lang="de"`, or keep English UI and mark German runs with `lang="de"`).
 
+## Regenerating the share card
+
+`og-image.png` is a static, hand-built asset — there is no generator in the repo.
+It was produced by rendering a 1200×630 HTML card with headless Chromium
+(Playwright). To recreate or tweak it: build an HTML file at 1200×630 with the
+OSIRIS wordmark (Inter 500, `letter-spacing: 0.34em`, `#f5f3ee`) on a `#0a0a0a`
+background, a faint gold radial glow (`rgba(184,151,90,0.14)`) and a 96×2px
+`--gold` rule beneath the wordmark, then screenshot it. Embed the Inter glyphs as
+a base64 `@font-face` (fetch the subset from Google Fonts with
+`...css2?family=Inter:wght@500&text=OSIRIS`) so the render doesn't depend on
+system fonts. Keep the output exactly 1200×630 — the `og:image:width/height`
+tags declare those dimensions. After changing it, re-run the platform preview
+debuggers (Facebook Sharing Debugger, LinkedIn Post Inspector) to bust caches.
+
 ## Git & deploys
 
 - **Commit and push directly to `main`.** GitHub Pages serves `main`, so a push
@@ -117,9 +132,9 @@ up. Grouped by phase; within a phase, order is rough priority.
 
 ### Phase 2 — discoverability & correctness (next)
 
-- [ ] **Social share cards** (deferred earlier): Open Graph + Twitter Card meta
-      on `index.html`/`imprint.html`, plus a 1200×630 share image. Without this,
-      the link previews as a bare URL in Slack/LinkedIn/iMessage.
+- [x] **Social share cards**: Open Graph + Twitter Card meta on
+      `index.html`/`imprint.html`, plus the 1200×630 `og-image.png`. The link now
+      previews as a branded card in Slack/LinkedIn/iMessage instead of a bare URL.
 - [ ] **JSON-LD structured data**: `Organization` schema (name, url, logo,
       address, sameAs) in `index.html` `<head>`.
 - [ ] **Imprint language correctness** (see Known inconsistencies): either
