@@ -31,7 +31,7 @@ with a long-form investment thesis, plus a legal imprint page.
 | `favicon.ico` | Multi-resolution (16/32/48) legacy icon. Served at `/favicon.ico`, the default browsers/readers request. |
 | `favicon-32x32.png` / `favicon-16x16.png` | Transparent PNG tab icons for modern browsers. |
 | `apple-touch-icon.png` | 180×180 iOS home-screen icon: the gold "O" on brand black (`#0a0a0a`) with padding (iOS rounds corners, ignores transparency). |
-| `og-image.png` | 1200×630 social share card (OSIRIS wordmark, gold-on-black). Referenced by the Open Graph / Twitter `og:image` tags. See "Regenerating the share card" below. |
+| `og-image.png` | 1200×630 social share card (OSIRIS wordmark, gold-on-black), ~12 KB (256-colour palette). Referenced by the Open Graph / Twitter `og:image` tags. See "Regenerating the share card" below. |
 | `site.webmanifest` | PWA/manifest metadata (name, icons, theme colors). |
 | `robots.txt` | Allows all crawlers; points to the sitemap. |
 | `sitemap.xml` | Lists canonical URLs (`/` and `/imprint.html`). Update `lastmod` when content changes. |
@@ -113,8 +113,11 @@ background, a faint gold radial glow (`rgba(184,151,90,0.14)`) and a 96×2px
 a base64 `@font-face` (fetch the subset from Google Fonts with
 `...css2?family=Inter:wght@500&text=OSIRIS`) so the render doesn't depend on
 system fonts. Keep the output exactly 1200×630 — the `og:image:width/height`
-tags declare those dimensions. After changing it, re-run the platform preview
-debuggers (Facebook Sharing Debugger, LinkedIn Post Inspector) to bust caches.
+tags declare those dimensions. Then shrink it with a 256-colour palette
+quantise (Pillow `Image.quantize(colors=256, dither=FLOYDSTEINBERG)`) — the
+flat black + subtle glow + text compresses from ~174 KB to ~12 KB with no
+visible loss. After changing it, re-run the platform preview debuggers
+(Facebook Sharing Debugger, LinkedIn Post Inspector) to bust caches.
 
 ## Regenerating the icons
 
@@ -197,7 +200,15 @@ up. Grouped by phase; within a phase, order is rough priority.
       sections, rules, and diagram strokes. Diagram grey labels bumped to match.
       All text pairs now pass AA; dark-section text already did. (Ultra-faint
       decorative diagram captions like the `#aaa` "LOG SCALE" watermark are left
-      as intentional de-emphasis.)
+      as intentional de-emphasis.) Verified with **axe-core (0 violations on
+      every page)**; the audit also caught two dark-background regressions since
+      fixed — the footer text/links (opacity was too low) and the dark "Space"
+      pillar body (a `.th-pillar-text p` specificity bug that overrode
+      `.th-p--light`, tipped below AA when `--grey` was darkened).
+- [x] **Audit / measurement pass**: axe-core clean on all pages; HTML validates
+      (only self-closing void-element style remains, which is valid HTML5); added
+      `type="button"` to nav toggles and `role="img"` to the diagram SVGs;
+      optimised `og-image.png` (174 KB → 12 KB).
 - [x] **Font performance**: self-hosted Cormorant Garamond + Inter as woff2 in
       `fonts/` (latin + latin-ext), declared in `fonts.css` with
       `font-display: swap`; removed the render-blocking Google Fonts request and

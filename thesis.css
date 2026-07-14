@@ -91,6 +91,12 @@
 
 .th-p--light:last-child { margin-bottom: 0; }
 
+/* Dark pillar reuses .th-pillar-text (whose `p` rule sets --grey); the
+   .th-p--light modifier must win there so body text stays light on black. */
+.th-pillar--dark .th-p--light {
+  color: rgba(245, 243, 238, 0.72);
+}
+
 /* ── Intro section (core thesis + diagram 1) ───────────────────────── */
 
 .th-intro {
