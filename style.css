@@ -12,7 +12,8 @@
   --cream:   #f0ece3;
   --gold:    #b8975a;
   --gold-lt: #d4b87a;
-  --grey:    #7a7a7a;
+  --gold-text: #7d673d; /* AA-compliant gold for small text on light backgrounds */
+  --grey:    #6a6a6a;
   --grey-lt: #c8c4bc;
   --rule:    #d0ccc4;
 
@@ -56,7 +57,7 @@ a {
   font-weight: 500;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-text);
   margin-bottom: 3rem;
 }
 
@@ -212,7 +213,7 @@ a {
   font-size: 11px;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-text);
   margin-bottom: 2rem;
 }
 
@@ -228,7 +229,7 @@ a {
 
 .hero-headline em {
   font-style: italic;
-  color: var(--gold);
+  color: var(--gold-text);
 }
 
 .hero-sub {
@@ -444,7 +445,7 @@ a {
 
 .imprint-headline em {
   font-style: italic;
-  color: var(--gold);
+  color: var(--gold-text);
 }
 
 .notfound-text {
@@ -457,12 +458,12 @@ a {
 
 .notfound-text a {
   color: var(--black);
-  border-bottom: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold-text);
   transition: color 0.2s;
 }
 
 .notfound-text a:hover {
-  color: var(--gold);
+  color: var(--gold-text);
 }
 
 .imprint-body {
@@ -489,7 +490,7 @@ a {
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-text);
   padding-top: 0.15rem;
 }
 
@@ -506,6 +507,6 @@ a {
 }
 
 .imprint-value a:hover {
-  color: var(--gold);
-  border-color: var(--gold);
+  color: var(--gold-text);
+  border-color: var(--gold-text);
 }

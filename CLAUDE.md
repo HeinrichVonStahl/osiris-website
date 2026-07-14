@@ -40,8 +40,13 @@ Everything keys off CSS custom properties defined in `:root` at the top of
 `style.css`. Use these tokens rather than hard-coding values:
 
 - **Colors:** `--black #0a0a0a`, `--white #f5f3ee`, `--cream #f0ece3`,
-  `--gold #b8975a` (accent), `--gold-lt #d4b87a`, `--grey`, `--grey-lt`,
-  `--rule` (hairline borders).
+  `--gold #b8975a` (accent — used for rules, borders, diagram strokes, and gold
+  text on **dark** sections), `--gold-lt #d4b87a`, `--gold-text #7d673d`
+  (AA-compliant darker gold for gold **text on light** backgrounds — labels,
+  eyebrows, headline `em`), `--grey #6a6a6a` (body/secondary text), `--grey-lt`,
+  `--rule` (hairline borders). The two golds are deliberate: `--gold` fails WCAG
+  AA as small text on light, so anywhere gold **text** sits on white/cream use
+  `--gold-text`; keep `--gold` for dark sections and non-text (rules/diagrams).
 - **Fonts:** `--font-serif` (Cormorant Garamond, used for headlines/quotes, often
   italic) and `--font-sans` (Inter, used for body/labels). Loaded from Google
   Fonts via `<link>` in each page `<head>`.
@@ -162,14 +167,14 @@ up. Grouped by phase; within a phase, order is rough priority.
 
 ### Phase 3 — polish & performance
 
-- [~] **Accessibility / contrast audit** (in progress). Measured WCAG AA
-      (4.5:1) contrast — failures on **light** backgrounds only; all dark-section
-      text passes. Outstanding, pending an owner decision on the palette:
-      - body grey `--grey #7a7a7a` on white/cream: **3.9 / 3.6** (fails 4.5).
-        Darkening to ~`#6a6a6a` fixes it (4.9 / 4.6) with minimal visual change.
-      - gold labels `--gold #b8975a` on white/cream: **2.5 / 2.3** (fails, even
-        for large text). A darker `--gold` for small text on light would notably
-        change the brand accent — the harder tradeoff.
+- [x] **Accessibility / contrast audit** — full WCAG AA (4.5:1) for text.
+      Darkened `--grey` `#7a7a7a`→`#6a6a6a` (body/secondary text) and introduced
+      `--gold-text #7d673d` for gold text on light backgrounds (labels, eyebrows,
+      pillar numbers, headline `em`, imprint). Bright `--gold` retained for dark
+      sections, rules, and diagram strokes. Diagram grey labels bumped to match.
+      All text pairs now pass AA; dark-section text already did. (Ultra-faint
+      decorative diagram captions like the `#aaa` "LOG SCALE" watermark are left
+      as intentional de-emphasis.)
 - [ ] **Font performance**: fonts are render-blocking Google Fonts. Add
       `&display=swap` (already present) review; consider self-hosting the two
       families to remove the third-party request and layout shift.
