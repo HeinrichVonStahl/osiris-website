@@ -69,6 +69,12 @@ Everything keys off CSS custom properties defined in `:root` at the top of
 - **Diagrams are hand-authored inline SVG** inside `index.html` (the log-scale
   charts and node diagrams). They use the same palette and font families as the
   CSS. Edit the SVG markup directly; there is no generator.
+- **Shared glyphs**: the AI-net / robot / ringed-planet motifs are defined **once**
+  as `<symbol id="glyph-ai|glyph-robot|glyph-space">` in a hidden `<svg>` sprite
+  near the top of `<body>`, and referenced via `<use href="#glyph-…">` in both the
+  pillar emblems (`.th-pillar-emblem`, at 64×64) and the Synthesis node circles
+  (sized per `<use>`). Edit a glyph in the symbol and both update. All-gold except
+  the robot's cream eyes.
 - Scroll-reveal: elements with class `.reveal` fade/slide in via an
   `IntersectionObserver` (the inline `<script>` at the bottom of `index.html`).
   Add `.reveal` to opt an element into the animation. A `<noscript>` block and
