@@ -169,6 +169,13 @@
   order: 1;
 }
 
+.th-pillar-emblem {
+  display: block;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 1.5rem;
+}
+
 .th-pillar-num {
   display: block;
   font-size: 11px;
