@@ -169,11 +169,25 @@
   order: 1;
 }
 
+.th-pillar-head {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
 .th-pillar-emblem {
-  display: block;
-  width: 56px;
-  height: 56px;
-  margin-bottom: 1.5rem;
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+}
+
+.th-pillar-idtext .th-pillar-num {
+  margin-bottom: 0.4rem;
+}
+
+.th-pillar-idtext .th-h3 {
+  margin-bottom: 0;
 }
 
 .th-pillar-num {
